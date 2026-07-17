@@ -1,0 +1,11 @@
+services:
+  sdk:
+    user: 1000:1000
+    build:
+      context: ./
+    image: sdk:1
+    volumes:
+      - ./:/srv
+    entrypoint: [ "sh", "-c", "composer install && tail -f /dev/null"]
+    working_dir: /srv
+    container_name: sdk
