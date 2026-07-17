@@ -14,43 +14,31 @@ class Product extends Resource
 {
     /**
      * External identifier for the product.
-     *
-     * @var string|null
      */
     public ?string $external_id;
 
     /**
      * Internal identifier for the product in the system.
-     *
-     * @var string|null
      */
     public ?string $product_id;
 
     /**
      * Name of the product.
-     *
-     * @var string|null
      */
     public ?string $name;
 
     /**
      * Description of the product.
-     *
-     * @var string|null
      */
     public ?string $description;
 
     /**
      * Quantity of the product.
-     *
-     * @var int|null
      */
     public ?int $quantity;
 
     /**
      * Price of the product in the smallest currency unit (e.g., cents).
-     *
-     * @var int|null
      */
     public ?int $price;
 
@@ -59,7 +47,7 @@ class Product extends Resource
      *
      * Initializes the Product object with the provided data.
      *
-     * @param array $data An associative array of product properties.
+     * @param array $data an associative array of product properties
      */
     public function __construct(array $data)
     {

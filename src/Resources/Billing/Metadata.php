@@ -14,22 +14,16 @@ class Metadata extends Resource
 {
     /**
      * Fee associated with the billing.
-     *
-     * @var int|null
      */
     public ?int $fee;
 
     /**
      * URL to redirect the user after payment is canceled or abandoned.
-     *
-     * @var string|null
      */
     public ?string $return_url;
 
     /**
      * URL to redirect the user after successful payment.
-     *
-     * @var string|null
      */
     public ?string $completion_url;
 
@@ -38,7 +32,7 @@ class Metadata extends Resource
      *
      * Initializes the Metadata object with the provided data.
      *
-     * @param array $data An associative array of metadata properties.
+     * @param array $data an associative array of metadata properties
      */
     public function __construct(array $data)
     {

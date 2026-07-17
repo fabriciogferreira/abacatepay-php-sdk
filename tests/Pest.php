@@ -11,7 +11,8 @@ use GuzzleHttp\Psr7\Response;
  * from a file. The file path is relative to the `Mocks/Response` directory.
  *
  * @param string $responseFilePath The relative path (excluding `.json`) to the mock response file.
- * @return Client The Guzzle HTTP client with the mock handler.
+ *
+ * @return Client the Guzzle HTTP client with the mock handler
  */
 function createMockClient(string $responseFilePath): Client
 {
@@ -20,19 +21,19 @@ function createMockClient(string $responseFilePath): Client
     $handler->append(
         new Response(
             status: 200,
-            body: file_get_contents(__DIR__ . '/Mocks/Response/' . $responseFilePath . '.json')
+            body: file_get_contents(__DIR__.'/Mocks/Response/'.$responseFilePath.'.json')
         )
     );
 
     return new Client([
-        'handler' => $handler
+        'handler' => $handler,
     ]);
 }
 
 /**
  * Creates a mock client with a predefined response for listing billings.
  *
- * @return Client The mock Guzzle HTTP client.
+ * @return Client the mock Guzzle HTTP client
  */
 function getListBillingsResponseClient(): Client
 {
@@ -42,7 +43,7 @@ function getListBillingsResponseClient(): Client
 /**
  * Creates a mock client with a predefined response for creating a billing.
  *
- * @return Client The mock Guzzle HTTP client.
+ * @return Client the mock Guzzle HTTP client
  */
 function getCreateBillingResponseClient(): Client
 {
@@ -52,7 +53,7 @@ function getCreateBillingResponseClient(): Client
 /**
  * Creates a mock client with a predefined response for listing customers.
  *
- * @return Client The mock Guzzle HTTP client.
+ * @return Client the mock Guzzle HTTP client
  */
 function getListCustomersResponseClient(): Client
 {
@@ -62,7 +63,7 @@ function getListCustomersResponseClient(): Client
 /**
  * Creates a mock client with a predefined response for creating a customer.
  *
- * @return Client The mock Guzzle HTTP client.
+ * @return Client the mock Guzzle HTTP client
  */
 function getCreateCustomerResponseClient(): Client
 {

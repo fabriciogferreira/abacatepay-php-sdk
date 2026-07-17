@@ -4,7 +4,7 @@ use AbacatePay\Clients\CustomerClient;
 use AbacatePay\Resources\Customer;
 use AbacatePay\Resources\Customer\Metadata;
 
-/**
+/*
  * Test case: Retrieve a list of customers.
  *
  * This test verifies that the `list` method of `CustomerClient` correctly retrieves
@@ -21,7 +21,7 @@ test('Get list of customers', function () {
     expect($customerClient->list())->toBeArray()->toContainOnlyInstancesOf(Customer::class);
 });
 
-/**
+/*
  * Test case: Create a new customer.
  *
  * This test verifies that the `create` method of `CustomerClient` successfully creates
@@ -34,10 +34,10 @@ test('Create a customer', function () {
             'name' => 'Abacate Lover',
             'cellphone' => '01912341234',
             'email' => 'lover@abacate.com',
-            'tax_id' => '13827826837'
-        ])
+            'tax_id' => '13827826837',
+        ]),
     ]);
-    
+
     // Mocked client with a fake response for creating a customer
     $fakeClient = getCreateCustomerResponseClient();
 

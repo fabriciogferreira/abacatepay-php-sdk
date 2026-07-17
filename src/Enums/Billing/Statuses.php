@@ -14,33 +14,33 @@ enum Statuses: string
      *
      * Indicates that the billing is pending and has not yet been processed.
      */
-    case PENDING = "PENDING";
+    case PENDING = 'PENDING';
 
     /**
      * Expired status.
      *
      * Indicates that the billing has expired and is no longer valid.
      */
-    case EXPIRED = "EXPIRED";
+    case EXPIRED = 'EXPIRED';
 
     /**
      * Cancelled status.
      *
      * Indicates that the billing has been cancelled and will not be processed.
      */
-    case CANCELLED = "CANCELLED";
+    case CANCELLED = 'CANCELLED';
 
     /**
      * Paid status.
      *
      * Indicates that the billing has been successfully paid.
      */
-    case PAID = "PAID";
+    case PAID = 'PAID';
 
     /**
      * Refunded status.
      *
      * Indicates that the billing has been refunded to the payer.
      */
-    case REFUNDED = "REFUNDED";
+    case REFUNDED = 'REFUNDED';
 }
