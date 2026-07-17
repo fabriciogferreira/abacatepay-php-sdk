@@ -18,7 +18,8 @@
         "guzzlehttp/guzzle": "^7.9"
     },
     "require-dev": {
-        "pestphp/pest": "^3.6"
+        "pestphp/pest": "^3.6",
+        "phpstan/phpstan": "^2.2"
     },
     "config": {
         "allow-plugins": {
