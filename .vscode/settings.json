@@ -1,14 +1,22 @@
 {
-	"editor.tabSize": 2,
+  "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.formatOnSave": true,
-	"php-cs-fixer.executablePath": "${workspaceFolder}/.vscode/php-cs-fixer",
-	"[php]": {
-		"editor.defaultFormatter": "junstyle.php-cs-fixer"
-	},
+  "php-cs-fixer.executablePath": "${workspaceFolder}/.vscode/php-cs-fixer",
+  "[php]": {
+    "editor.defaultFormatter": "junstyle.php-cs-fixer"
+  },
   "phpstan.dockerContainerName": "sdk",
   "phpstan.paths": {
     "${workspaceFolder}": "/srv"
   },
   "php.validate.executablePath": "/home/${USER}/.asdf/shims/php",
+  "cSpell.customDictionaries": {
+    "custom-dictionary-workspace": {
+      "name": "custom-dictionary-workspace",
+      "path": "${workspaceFolder:abacatepay-php-sdk}/.cspell/custom-dictionary-workspace.txt",
+      "addWords": true,
+      "scope": "workspace"
+    }
+  },
 }
