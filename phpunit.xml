@@ -12,6 +12,7 @@
     <source>
         <include>
             <directory suffix=".php">./v1</directory>
+            <directory suffix=".php">./v2</directory>
         </include>
     </source>
 </phpunit>

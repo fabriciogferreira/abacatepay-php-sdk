@@ -6,16 +6,22 @@ use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
 return (new Config())
+    ->setIndent('  ')
     ->setRiskyAllowed(false)
     ->setRules([
         '@auto' => true,
         '@PhpCsFixer' => true
     ])
+    
     // 💡 by default, Fixer looks for `*.php` files excluding `./vendor/` - here, you can groom this config
     ->setFinder(
         (new Finder())
             // 💡 root folder to check
             ->in(__DIR__)
+            ->exclude([
+              'src/v1/',
+              'tests/v1/'
+            ])
             // 💡 additional files, eg bin entry file
             // ->append([__DIR__.'/bin-entry-file'])
             // 💡 folders to exclude, if any

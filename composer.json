@@ -20,9 +20,11 @@
     ],
     "require": {
         "php": "^7.2.5 || ^8.0",
-        "guzzlehttp/guzzle": "^7.9"
+        "guzzlehttp/guzzle": "^7.9",
+        "fakerphp/faker": "^1.24"
     },
     "require-dev": {
+        "vlucas/phpdotenv": "^5.6",
         "pestphp/pest": "^3.8",
         "phpstan/phpstan": "^2.2",
         "friendsofphp/php-cs-fixer": "^3.95"
