@@ -1,0 +1,14 @@
+{
+	"editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+	"php-cs-fixer.executablePath": "${workspaceFolder}/.vscode/php-cs-fixer",
+	"[php]": {
+		"editor.defaultFormatter": "junstyle.php-cs-fixer"
+	},
+  "phpstan.dockerContainerName": "opbed-backend",
+  "phpstan.paths": {
+    "${workspaceFolder}": "/srv"
+  },
+  "Laravel.phpEnvironment": "docker",
+}

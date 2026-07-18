@@ -1,6 +1,6 @@
 FROM composer:2.10.1 AS composer
 
-FROM php:8.2.0-bullseye
+FROM php:8.2.32-trixie
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 

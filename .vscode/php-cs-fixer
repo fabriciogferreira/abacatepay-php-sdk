@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+PHP_BIN="/home/fabricio/.asdf/shims/php"
+
+cd "$ROOT_DIR"
+
+exec "$PHP_BIN" "$ROOT_DIR/vendor/bin/php-cs-fixer" "$@"
