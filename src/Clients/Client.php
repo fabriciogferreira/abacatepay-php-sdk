@@ -50,9 +50,9 @@ class Client
      *
      * @param string $method  The HTTP method (e.g., GET, POST).
      * @param string $uri     the endpoint URI relative to the base URI
-     * @param array<string, mixed>  $options optional settings and parameters for the request
+     * @param array  $options optional settings and parameters for the request
      *
-     * @return array<string, mixed> the response data as an associative array
+     * @return array the response data as an associative array
      *
      * @throws \Exception if an error occurs during the request
      */

@@ -37,7 +37,7 @@ class Metadata extends Resource
      *
      * Initializes the Metadata object with the provided data.
      *
-     * @param array<string, mixed> $data an associative array of metadata properties
+     * @param array $data an associative array of metadata properties
      */
     public function __construct(array $data)
     {
