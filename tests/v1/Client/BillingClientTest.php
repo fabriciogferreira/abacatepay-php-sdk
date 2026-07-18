@@ -1,13 +1,13 @@
 <?php
 
-use AbacatePay\Clients\BillingClient;
-use AbacatePay\Enums\Billing\Frequencies;
-use AbacatePay\Enums\Billing\Methods;
-use AbacatePay\Resources\Billing;
-use AbacatePay\Resources\Billing\Metadata as BillingMetadata;
-use AbacatePay\Resources\Customer\Metadata as CustomerMetadata;
-use AbacatePay\Resources\Billing\Product;
-use AbacatePay\Resources\Customer;
+use AbacatePay\v1\Clients\BillingClient;
+use AbacatePay\v1\Enums\Billing\Frequencies;
+use AbacatePay\v1\Enums\Billing\Methods;
+use AbacatePay\v1\Resources\Billing;
+use AbacatePay\v1\Resources\Billing\Metadata as BillingMetadata;
+use AbacatePay\v1\Resources\Customer\Metadata as CustomerMetadata;
+use AbacatePay\v1\Resources\Billing\Product;
+use AbacatePay\v1\Resources\Customer;
 
 /**
  * Test case: Retrieve a list of billings.

@@ -7,6 +7,11 @@
             "AbacatePay\\": "src/"
         }
     },
+    "autoload-dev": {
+        "files": [
+            "tests/v1/Helpers.php"
+        ]
+    },
     "authors": [
         {
             "name": "Julimar Junior",

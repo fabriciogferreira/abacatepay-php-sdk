@@ -1,8 +1,8 @@
 <?php
 
-use AbacatePay\Clients\CustomerClient;
-use AbacatePay\Resources\Customer;
-use AbacatePay\Resources\Customer\Metadata;
+use AbacatePay\v1\Clients\CustomerClient;
+use AbacatePay\v1\Resources\Customer;
+use AbacatePay\v1\Resources\Customer\Metadata;
 
 /**
  * Test case: Retrieve a list of customers.

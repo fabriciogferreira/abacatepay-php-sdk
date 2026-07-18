@@ -1,8 +1,8 @@
 <?php
 
-namespace AbacatePay\Resources\Billing;
+namespace AbacatePay\v1\Resources\Billing;
 
-use AbacatePay\Resources\Resource;
+use AbacatePay\v1\Resources\Resource;
 
 /**
  * Represents metadata for a billing resource in the AbacatePay system.

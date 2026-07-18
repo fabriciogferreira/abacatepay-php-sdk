@@ -1,6 +1,6 @@
 <?php
 
-namespace AbacatePay\Enums\Billing;
+namespace AbacatePay\v1\Enums\Billing;
 
 /**
  * Enumeration defining billing methods.

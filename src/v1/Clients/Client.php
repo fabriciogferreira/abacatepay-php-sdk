@@ -1,6 +1,6 @@
 <?php
 
-namespace AbacatePay\Clients;
+namespace AbacatePay\v1\Clients;
 
 use Exception;
 use GuzzleHttp\Client as GuzzleHttpClient;

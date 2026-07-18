@@ -1,6 +1,6 @@
 <?php
 
-namespace AbacatePay\Resources;
+namespace AbacatePay\v1\Resources;
 
 use DateTime;
 

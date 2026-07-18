@@ -1,9 +1,9 @@
 <?php
 
-namespace AbacatePay\Resources;
+namespace AbacatePay\v1\Resources;
 
-use AbacatePay\Resources\Customer\Metadata;
-use AbacatePay\Resources\Resource;
+use AbacatePay\v1\Resources\Customer\Metadata;
+use AbacatePay\v1\Resources\Resource;
 
 /**
  * Represents a customer resource in the AbacatePay system.

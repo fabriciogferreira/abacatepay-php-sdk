@@ -1,8 +1,8 @@
 <?php
 
-namespace AbacatePay\Clients;
+namespace AbacatePay\v1\Clients;
 
-use AbacatePay\Resources\Billing;
+use AbacatePay\v1\Resources\Billing;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 /**

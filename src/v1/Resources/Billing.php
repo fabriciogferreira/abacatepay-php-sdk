@@ -1,12 +1,12 @@
 <?php
 
-namespace AbacatePay\Resources;
+namespace AbacatePay\v1\Resources;
 
-use AbacatePay\Enums\Billing\Frequencies;
-use AbacatePay\Enums\Billing\Methods;
-use AbacatePay\Enums\Billing\Statuses;
-use AbacatePay\Resources\Billing\Metadata;
-use AbacatePay\Resources\Billing\Product;
+use AbacatePay\v1\Enums\Billing\Frequencies;
+use AbacatePay\v1\Enums\Billing\Methods;
+use AbacatePay\v1\Enums\Billing\Statuses;
+use AbacatePay\v1\Resources\Billing\Metadata;
+use AbacatePay\v1\Resources\Billing\Product;
 use DateTime;
 
 /**
