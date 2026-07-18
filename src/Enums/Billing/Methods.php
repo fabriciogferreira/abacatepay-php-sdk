@@ -14,5 +14,5 @@ enum Methods: string
      *
      * Represents the PIX payment method, a popular instant payment system in Brazil.
      */
-    case PIX = 'PIX';
+    case PIX = "PIX";
 }

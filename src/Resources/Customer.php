@@ -3,6 +3,7 @@
 namespace AbacatePay\Resources;
 
 use AbacatePay\Resources\Customer\Metadata;
+use AbacatePay\Resources\Resource;
 
 /**
  * Represents a customer resource in the AbacatePay system.
@@ -13,11 +14,15 @@ class Customer extends Resource
 {
     /**
      * Unique identifier for the customer.
+     *
+     * @var string|null
      */
     public ?string $id;
 
     /**
      * Metadata associated with the customer.
+     *
+     * @var Metadata|null
      */
     public ?Metadata $metadata;
 
@@ -26,7 +31,7 @@ class Customer extends Resource
      *
      * Initializes the Customer object with the provided data.
      *
-     * @param array $data associative array of customer properties
+     * @param array $data Associative array of customer properties.
      */
     public function __construct(array $data)
     {
@@ -38,8 +43,8 @@ class Customer extends Resource
     /**
      * Dynamically sets a property value after processing it.
      *
-     * @param string $name  the name of the property to set
-     * @param mixed  $value the value to set for the property
+     * @param string $name The name of the property to set.
+     * @param mixed $value The value to set for the property.
      */
     public function __set($name, $value)
     {
@@ -55,21 +60,19 @@ class Customer extends Resource
     /**
      * Processes the value of a property based on its type and context.
      *
-     * @param string $name  the name of the property
-     * @param mixed  $value the value to process
-     *
-     * @return mixed the processed value
+     * @param string $name The name of the property.
+     * @param mixed $value The value to process.
+     * @return mixed The processed value.
      */
     private function processValue($name, $value)
     {
-        if (null === $value) {
+        if ($value === null) {
             return null;
         }
 
         switch ($name) {
             case 'metadata':
                 return $this->__initializeResource(Metadata::class, $value);
-
             default:
                 return $value;
         }
