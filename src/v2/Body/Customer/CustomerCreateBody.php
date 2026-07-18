@@ -2,7 +2,9 @@
 
 namespace AbacatePay\v2\Body\Customer;
 
-class CustomerCreateBody
+use AbacatePay\v2\Body\Body;
+
+class CustomerCreateBody extends Body
 {
   private string $email;
   private ?string $name = null;

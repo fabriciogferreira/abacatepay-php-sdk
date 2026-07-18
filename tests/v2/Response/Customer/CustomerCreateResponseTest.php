@@ -17,7 +17,7 @@ $expected = [
 /**
  * @param array<string, mixed> $expected
  */
-function assertResponse(
+function assertCustomerCreateResponse(
   CustomerCreateResponse $customerCreateResponse,
   array $expected,
 ): void {
@@ -33,8 +33,7 @@ function assertResponse(
   });
 }
 
-
-assertResponse(
+assertCustomerCreateResponse(
   CustomerCreateResponse::fromArray($expected),
   $expected,
 );

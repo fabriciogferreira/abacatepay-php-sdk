@@ -9,7 +9,8 @@
     },
     "autoload-dev": {
         "files": [
-            "tests/v1/Helpers.php"
+            "tests/v1/Helpers.php",
+            "tests/v2/Body/Assertions.php"
         ]
     },
     "authors": [

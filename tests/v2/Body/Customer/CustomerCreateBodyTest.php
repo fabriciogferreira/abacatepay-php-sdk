@@ -2,19 +2,6 @@
 
 use AbacatePay\v2\Body\Customer\CustomerCreateBody;
 
-/**
- * @param array<string, mixed> $expected
- */
-function assertBody(
-  CustomerCreateBody $customerCreateBody,
-  array $expected,
-  string $description = '',
-): void {
-  it('should return the correct body '.$description, function () use ($customerCreateBody, $expected) {
-    expect($customerCreateBody->toArray())->toBe($expected);
-  });
-}
-
 assertBody(
   CustomerCreateBody::make('test@example.com'),
   [
