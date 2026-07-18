@@ -26,7 +26,7 @@ class Customer extends Resource
      *
      * Initializes the Customer object with the provided data.
      *
-     * @param array $data associative array of customer properties
+     * @param array<string, mixed> $data associative array of customer properties
      */
     public function __construct(array $data)
     {

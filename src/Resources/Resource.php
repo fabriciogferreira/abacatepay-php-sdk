@@ -53,7 +53,7 @@ class Resource
      * Initializes a resource object from an array or object.
      *
      * @param string       $resource the resource class name
-     * @param array|object $value    the value to initialize as a resource object
+     * @param array<string, mixed>|object $value    the value to initialize as a resource object
      *
      * @return null|object the initialized resource object or null if the value is invalid
      */
@@ -70,7 +70,7 @@ class Resource
      * Fills a resource object with data from an associative array.
      *
      * @param object $class the resource object to fill
-     * @param array  $data  the data to populate into the resource object
+     * @param array<string, mixed>  $data  the data to populate into the resource object
      */
     protected function __fill(object $class, array $data): void
     {

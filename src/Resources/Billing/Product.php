@@ -47,7 +47,7 @@ class Product extends Resource
      *
      * Initializes the Product object with the provided data.
      *
-     * @param array $data an associative array of product properties
+     * @param array<string, mixed> $data an associative array of product properties
      */
     public function __construct(array $data)
     {

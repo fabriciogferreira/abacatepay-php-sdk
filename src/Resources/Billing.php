@@ -95,7 +95,7 @@ class Billing extends Resource
      *
      * Initializes the Billing object with the provided data.
      *
-     * @param array $data associative array of billing properties
+     * @param array<string, mixed> $data associative array of billing properties
      */
     public function __construct(array $data)
     {
