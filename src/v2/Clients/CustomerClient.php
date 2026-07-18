@@ -2,8 +2,10 @@
 
 namespace AbacatePay\v2\Clients;
 
+use AbacatePay\v2\Body\Customer\CustomerGetBody;
 use AbacatePay\v2\Body\Customer\CustomerCreateBody;
 use AbacatePay\v2\Body\Customer\CustomerDeleteBody;
+use AbacatePay\v2\Responses\Customer\CustomerGetResponse;
 use AbacatePay\v2\Responses\Customer\CustomerCreateResponse;
 use AbacatePay\v2\Responses\Customer\CustomerDeleteResponse;
 
@@ -24,6 +26,16 @@ class CustomerClient
     );
 
     return CustomerCreateResponse::fromArray($data);
+  }
+
+  public function get(
+    CustomerGetBody $customerGetBody
+  ): CustomerGetResponse {
+    $data = $this->abacatePayClient->get(
+      'customers/get' . $customerGetBody->toQueryString(),
+    );
+
+    return CustomerGetResponse::fromArray($data);
   }
 
   public function delete(

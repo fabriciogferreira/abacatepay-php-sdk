@@ -2,6 +2,7 @@
 
 use Faker\Factory;
 use AbacatePay\v2\Clients\AbacatePayClient;
+use AbacatePay\v2\Body\Customer\CustomerGetBody;
 use AbacatePay\v2\Body\Customer\CustomerCreateBody;
 use AbacatePay\v2\Body\Customer\CustomerDeleteBody;
 
@@ -61,6 +62,46 @@ test('creates a customer', function () {
     ;
 });
 
+
+test('gets a customer', function () {
+  $faker = Factory::create('pt_BR');
+
+  $email = $faker->email();
+  $cellphone = $faker->phoneNumber();
+  $name = $faker->name();
+  $taxId = rand(0, 1) ? $faker->cnpj() : $faker->cpf();
+  $zipCode = $faker->postcode();
+
+  $token = getToken();
+
+  $abacatePayClient = new AbacatePayClient($token);
+
+  $customerCreateBody = CustomerCreateBody::make($email)
+    ->cellphone($cellphone)
+    ->name($name)
+    ->taxId($taxId)
+    ->zipCode($zipCode)
+    ;
+
+  $customerCreateResponse = $abacatePayClient->customers()
+    ->create($customerCreateBody);
+
+  $customerGetBody = CustomerGetBody::make($customerCreateResponse->id);
+
+  $customerGetResponse = $abacatePayClient->customers()
+    ->get($customerGetBody);
+
+  expect($customerGetResponse)
+    ->not->toBeNull()
+    ->and($customerGetResponse->id)->toBe($customerCreateResponse->id)
+    ->and($customerGetResponse->devMode)->toBe(true)
+    ->and($customerGetResponse->name)->toBe($customerCreateResponse->name)
+    ->and($customerGetResponse->email)->toBe($customerCreateResponse->email)
+    ->and($customerGetResponse->cellphone)->toBe($customerCreateResponse->cellphone)
+    ->and($customerGetResponse->taxId)->toBe($customerCreateResponse->taxId)
+    ->and($customerGetResponse->zipCode)->toBe($customerCreateResponse->zipCode)
+    ;
+});
 
 test('deletes a customer', function () {
   $faker = Factory::create('pt_BR');
