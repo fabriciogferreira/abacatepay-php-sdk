@@ -126,4 +126,9 @@ class AbacatePayClient
   {
     return new CustomerClient($this);
   }
+
+  public function subscriptions(): SubscriptionClient
+  {
+    return new SubscriptionClient($this);
+  }
 }
