@@ -74,9 +74,11 @@ class AbacatePayClient
         $options
       );
 
-      $body = json_decode($response->getBody(), true);
+      $body = $response->getBody();
 
-      return $body['data'];
+      $body = json_decode($body, true);
+
+      return $body;
     } catch (RequestException $e) {
       $this->handleException($e);
     }

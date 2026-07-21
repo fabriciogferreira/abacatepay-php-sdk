@@ -2,12 +2,12 @@
 
 namespace AbacatePay\v2\Clients;
 
-use AbacatePay\v2\Body\Customer\CustomerGetBody;
-use AbacatePay\v2\Body\Customer\CustomerCreateBody;
-use AbacatePay\v2\Body\Customer\CustomerDeleteBody;
-use AbacatePay\v2\Responses\Customer\CustomerGetResponse;
-use AbacatePay\v2\Responses\Customer\CustomerCreateResponse;
-use AbacatePay\v2\Responses\Customer\CustomerDeleteResponse;
+use AbacatePay\v2\RequestData\Customer\CustomerGetRequestData;
+use AbacatePay\v2\ResponseData\Customer\CustomerGetResponseData;
+use AbacatePay\v2\RequestData\Customer\CustomerCreateRequestData;
+use AbacatePay\v2\RequestData\Customer\CustomerDeleteRequestData;
+use AbacatePay\v2\ResponseData\Customer\CustomerCreateResponseData;
+use AbacatePay\v2\ResponseData\Customer\CustomerDeleteResponseData;
 
 class CustomerClient
 {
@@ -16,35 +16,35 @@ class CustomerClient
   ) {}
 
   public function create(
-    CustomerCreateBody $customerCreateBody
-  ): CustomerCreateResponse {
+    CustomerCreateRequestData $customerCreateRequestData
+  ): CustomerCreateResponseData {
     $data = $this->abacatePayClient->post(
       'customers/create',
       [
-        'json' => $customerCreateBody->toArray(),
+        'json' => $customerCreateRequestData->toArray(),
       ]
     );
 
-    return CustomerCreateResponse::fromArray($data);
+    return CustomerCreateResponseData::fromArray($data);
   }
 
   public function get(
-    CustomerGetBody $customerGetBody
-  ): CustomerGetResponse {
+    CustomerGetRequestData $customerGetRequestData
+  ): CustomerGetResponseData {
     $data = $this->abacatePayClient->get(
-      'customers/get' . $customerGetBody->toQueryString(),
+      'customers/get' . $customerGetRequestData->toQueryString(),
     );
 
-    return CustomerGetResponse::fromArray($data);
+    return CustomerGetResponseData::fromArray($data);
   }
 
   public function delete(
-    CustomerDeleteBody $customerDeleteBody
-  ): CustomerDeleteResponse {
+    CustomerDeleteRequestData $customerDeleteRequestData
+  ): CustomerDeleteResponseData {
     $data = $this->abacatePayClient->post(
-      'customers/delete' . $customerDeleteBody->toQueryString(),
+      'customers/delete' . $customerDeleteRequestData->toQueryString(),
     );
 
-    return CustomerDeleteResponse::fromArray($data);
+    return CustomerDeleteResponseData::fromArray($data);
   }
 }

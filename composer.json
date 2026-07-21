@@ -11,7 +11,7 @@
         "files": [
             "tests/v1/Helpers.php",
             "tests/v2/Helpers.php",
-            "tests/v2/Body/Assertions.php",
+            "tests/v2/RequestData/Assertions.php",
             "tests/v2/Exception/Assertions.php"
         ]
     },
