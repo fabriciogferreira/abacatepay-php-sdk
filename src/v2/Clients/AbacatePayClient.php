@@ -4,6 +4,15 @@ namespace AbacatePay\v2\Clients;
 
 use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\RequestException;
+use AbacatePay\v2\Exceptions\AbacatePayException;
+use AbacatePay\v2\Exceptions\AbacatePayApiException;
+use AbacatePay\v2\Exceptions\AbacatePayNetworkException;
+use AbacatePay\v2\Exceptions\AbacatePayNotFoundException;
+use AbacatePay\v2\Exceptions\AbacatePayRateLimitException;
+use AbacatePay\v2\Exceptions\AbacatePayValidationException;
+use AbacatePay\v2\Exceptions\AbacatePayAuthorizationException;
+use AbacatePay\v2\Exceptions\AbacatePayAuthenticationException;
+use AbacatePay\v2\Exceptions\AbacatePayInvalidRequestException;
 
 /**
  * Client class for interacting with the AbacatePay API.
@@ -51,7 +60,7 @@ class AbacatePayClient
    *
    * @return array<string, mixed> the response data as an associative array
    *
-   * @throws \Exception if an error occurs during the request
+   * @throws AbacatePayException if an error occurs during the request
    */
   public function request(
     string $method,
@@ -69,16 +78,7 @@ class AbacatePayClient
 
       return $body['data'];
     } catch (RequestException $e) {
-      $errorMessage = null;
-
-      if ($e->hasResponse()) {
-        $errorResponse = json_decode($e->getResponse()->getBody());
-        $errorMessage = $errorResponse->message ?? $errorResponse->error;
-      }
-
-      throw new \Exception('Request error: '.$errorMessage ?? $e->getMessage(), $e->getCode());
-    } catch (\Throwable $e) {
-      throw new \Exception('Unexpected error: '.$e->getMessage(), $e->getCode());
+      $this->handleException($e);
     }
   }
 
@@ -130,5 +130,69 @@ class AbacatePayClient
   public function subscriptions(): SubscriptionClient
   {
     return new SubscriptionClient($this);
+  }
+
+  /**
+   * @throws AbacatePayNetworkException
+   * @throws AbacatePayValidationException
+   * @throws AbacatePayInvalidRequestException
+   * @throws AbacatePayAuthorizationException
+   * @throws AbacatePayAuthenticationException
+   * @throws AbacatePayRateLimitException
+   * @throws AbacatePayNotFoundException
+   * @throws AbacatePayApiException
+   */
+  public function handleException(
+    RequestException $requestException
+  ): never {
+    $response = $requestException->getResponse();
+
+    if (!$response) {
+      throw new AbacatePayNetworkException(
+        $requestException->getMessage(),
+        $requestException
+      );
+    }
+    
+    $statusCode = $response->getStatusCode();
+
+    $body = $response->getBody();
+
+    $contents = $body->getContents();
+
+    $contents = json_decode($contents, true);
+
+    $message = $contents['error'] ?? 'An unknown error occurred';
+
+    match ($statusCode) {
+      422 => throw new AbacatePayValidationException(
+        $message,
+        $requestException
+      ),
+      400 => throw new AbacatePayInvalidRequestException(
+        $message,
+        $requestException
+      ),
+      403 => throw new AbacatePayAuthorizationException(
+        $message,
+        $requestException
+      ),
+      401 => throw new AbacatePayAuthenticationException(
+        $message,
+        $requestException
+      ),
+      429 => throw new AbacatePayRateLimitException(
+        $message,
+        $requestException
+      ),
+      404 => throw new AbacatePayNotFoundException(
+        $message,
+        $requestException
+      ),
+      default => throw new AbacatePayApiException(
+        $message,
+        $requestException
+      ),
+    };
   }
 }
