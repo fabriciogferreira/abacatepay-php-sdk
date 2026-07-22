@@ -3,11 +3,11 @@
 namespace AbacatePay\v2\Clients;
 
 use AbacatePay\v2\RequestData\Customer\CustomerGetRequestData;
-use AbacatePay\v2\ResponseData\Customer\CustomerGetResponseData;
+use AbacatePay\v2\ResponseBody\Customer\CustomerGetResponseBody;
 use AbacatePay\v2\RequestData\Customer\CustomerCreateRequestData;
 use AbacatePay\v2\RequestData\Customer\CustomerDeleteRequestData;
-use AbacatePay\v2\ResponseData\Customer\CustomerCreateResponseData;
-use AbacatePay\v2\ResponseData\Customer\CustomerDeleteResponseData;
+use AbacatePay\v2\ResponseBody\Customer\CustomerCreateResponseBody;
+use AbacatePay\v2\ResponseBody\Customer\CustomerDeleteResponseBody;
 
 class CustomerClient
 {
@@ -17,34 +17,34 @@ class CustomerClient
 
   public function create(
     CustomerCreateRequestData $customerCreateRequestData
-  ): CustomerCreateResponseData {
-    $data = $this->abacatePayClient->post(
+  ): CustomerCreateResponseBody {
+    $body = $this->abacatePayClient->post(
       'customers/create',
       [
         'json' => $customerCreateRequestData->toArray(),
       ]
     );
 
-    return CustomerCreateResponseData::fromArray($data);
+    return new CustomerCreateResponseBody($body);
   }
 
   public function get(
     CustomerGetRequestData $customerGetRequestData
-  ): CustomerGetResponseData {
-    $data = $this->abacatePayClient->get(
+  ): CustomerGetResponseBody {
+    $body = $this->abacatePayClient->get(
       'customers/get' . $customerGetRequestData->toQueryString(),
     );
 
-    return CustomerGetResponseData::fromArray($data);
+    return new CustomerGetResponseBody($body);
   }
 
   public function delete(
     CustomerDeleteRequestData $customerDeleteRequestData
-  ): CustomerDeleteResponseData {
-    $data = $this->abacatePayClient->post(
+  ): CustomerDeleteResponseBody {
+    $body = $this->abacatePayClient->post(
       'customers/delete' . $customerDeleteRequestData->toQueryString(),
     );
 
-    return CustomerDeleteResponseData::fromArray($data);
+    return new CustomerDeleteResponseBody($body);
   }
 }

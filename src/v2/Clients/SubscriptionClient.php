@@ -4,8 +4,8 @@ namespace AbacatePay\v2\Clients;
 
 use AbacatePay\v2\RequestData\Subscription\SubscriptionCreateRequestData;
 use AbacatePay\v2\RequestData\Subscription\SubscriptionCancelRequestData;
-use AbacatePay\v2\ResponseData\Subscription\SubscriptionCancelResponseData;
-use AbacatePay\v2\ResponseData\Subscription\SubscriptionCreateResponseData;
+use AbacatePay\v2\ResponseBody\Subscription\SubscriptionCancelResponseBody;
+use AbacatePay\v2\ResponseBody\Subscription\SubscriptionCreateResponseBody;
 
 class SubscriptionClient
 {
@@ -15,27 +15,27 @@ class SubscriptionClient
 
   public function create(
     SubscriptionCreateRequestData $subscriptionCreateRequestData
-  ): SubscriptionCreateResponseData {
-    $data = $this->abacatePayClient->post(
+  ): SubscriptionCreateResponseBody {
+    $body = $this->abacatePayClient->post(
       'subscriptions/create',
       [
         'json' => $subscriptionCreateRequestData->toArray(),
       ]
     );
 
-    return SubscriptionCreateResponseData::fromArray($data);
+    return new SubscriptionCreateResponseBody($body);
   }
 
   public function cancel(
     SubscriptionCancelRequestData $subscriptionCancelRequestData
-  ): SubscriptionCancelResponseData {
-    $data = $this->abacatePayClient->post(
+  ): SubscriptionCancelResponseBody {
+    $body = $this->abacatePayClient->post(
       'subscriptions/cancel',
       [
         'json' => $subscriptionCancelRequestData->toArray(),
       ]
     );
 
-    return SubscriptionCancelResponseData::fromArray($data);
+    return new SubscriptionCancelResponseBody($body);
   }
 }
