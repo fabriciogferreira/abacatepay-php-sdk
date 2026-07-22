@@ -2,27 +2,28 @@
 
 namespace AbacatePay\v2\RequestData\Subscription;
 
-use AbacatePay\v2\RequestData\Item;
+use AbacatePay\v2\Models\Item;
 use AbacatePay\v2\RequestData\RequestData;
 use AbacatePay\v2\Enums\SubscriptionMethodEnum;
+
 class SubscriptionCreateRequestData extends RequestData
 {
   /** @var list<Item> */
   private array $items;
 
-  /** @var list<SubscriptionMethodEnum>|null */
+  /** @var null|list<SubscriptionMethodEnum> */
   private ?array $methods = null;
 
   private ?string $returnUrl = null;
   private ?string $completionUrl = null;
   private ?string $customerId = null;
 
-  /** @var list<string>|null */
+  /** @var null|list<string> */
   private ?array $coupons = null;
 
   private ?string $externalId = null;
 
-  /** @var array<string, mixed>|null */
+  /** @var null|array<string, mixed> */
   private ?array $metadata = null;
 
   /**

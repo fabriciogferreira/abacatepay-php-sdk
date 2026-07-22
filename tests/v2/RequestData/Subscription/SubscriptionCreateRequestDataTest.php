@@ -1,7 +1,7 @@
 <?php
 
-use AbacatePay\v2\RequestData\Item;
 use AbacatePay\v2\Enums\SubscriptionMethodEnum;
+use AbacatePay\v2\Models\Item;
 use AbacatePay\v2\RequestData\Subscription\SubscriptionCreateRequestData;
 
 assertRequestData(

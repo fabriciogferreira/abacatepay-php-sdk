@@ -1,6 +1,6 @@
 <?php
 
-namespace AbacatePay\v2\RequestData;
+namespace AbacatePay\v2\Models;
 
 class Item
 {

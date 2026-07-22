@@ -1,11 +1,12 @@
 <?php
 
-namespace AbacatePay\v2\ResponseData;
+namespace AbacatePay\v2\Models;
 
-class Interest
+class Fine
 {
   private function __construct(
     public readonly int $value,
+    public readonly string $type,
   ) {}
 
   /**
@@ -15,6 +16,7 @@ class Interest
   {
     return new self(
       value: $data['value'],
+      type: $data['type'],
     );
   }
 }

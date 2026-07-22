@@ -2,9 +2,7 @@
 
 namespace AbacatePay\v2\ResponseData\Subscription;
 
-use AbacatePay\v2\ResponseData\ResponseData;
-
-class SubscriptionCancelResponseData extends ResponseData
+class SubscriptionCancelResponseData
 {
   /**
    * @param list<string> $coupons

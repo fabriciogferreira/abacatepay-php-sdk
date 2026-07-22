@@ -2,9 +2,7 @@
 
 namespace AbacatePay\v2\ResponseData\Customer;
 
-use AbacatePay\v2\ResponseData\ResponseData;
-
-class CustomerGetResponseData extends ResponseData
+class CustomerGetResponseData
 {
   private function __construct(
     public readonly ?string $id,

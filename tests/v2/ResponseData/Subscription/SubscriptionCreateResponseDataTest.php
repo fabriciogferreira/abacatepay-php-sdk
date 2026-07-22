@@ -1,8 +1,8 @@
 <?php
 
-use AbacatePay\v2\ResponseData\Item;
-use AbacatePay\v2\ResponseData\Fine;
-use AbacatePay\v2\ResponseData\Interest;
+use AbacatePay\v2\Models\Item;
+use AbacatePay\v2\Models\Fine;
+use AbacatePay\v2\Models\Interest;
 use AbacatePay\v2\ResponseData\Subscription\SubscriptionCreateResponseData;
 
 $expected = [
