@@ -1,12 +1,12 @@
 <?php
 
 use Faker\Factory;
-use AbacatePay\v2\Body\Item;
+use AbacatePay\v2\Models\Item;
 use AbacatePay\v2\Clients\AbacatePayClient;
-use AbacatePay\v2\Body\Customer\CustomerCreateBody;
 use AbacatePay\v2\Enums\SubscriptionMethodEnum;
-use AbacatePay\v2\Body\Subscription\SubscriptionCancelBody;
-use AbacatePay\v2\Body\Subscription\SubscriptionCreateBody;
+use AbacatePay\v2\RequestData\Customer\CustomerCreateRequestData;
+use AbacatePay\v2\RequestData\Subscription\SubscriptionCancelRequestData;
+use AbacatePay\v2\RequestData\Subscription\SubscriptionCreateRequestData;
 
 beforeEach(function () {
   $token = getToken();
@@ -16,123 +16,123 @@ beforeEach(function () {
   }
 });
 
-// test('creates a subscription', function () {
-//   $faker = Factory::create('pt_BR');
-//   $token = getToken();
-//   $abacatePayClient = new AbacatePayClient($token);
+test('creates a subscription', function () {
+  $faker = Factory::create('pt_BR');
+  $token = getToken();
+  $abacatePayClient = new AbacatePayClient($token);
 
-//   $product = $abacatePayClient->post('products/create', [
-//     'json' => [
-//       'externalId' => 'sdk-test-sub-'.uniqid(),
-//       'name' => 'Plano Teste SDK',
-//       'price' => 4990,
-//       'currency' => 'BRL',
-//       'cycle' => 'MONTHLY',
-//       'description' => 'Produto de assinatura para testes do SDK',
-//     ],
-//   ]);
+  $product = $abacatePayClient->post('products/create', [
+    'json' => [
+      'externalId' => 'sdk-test-sub-'.uniqid(),
+      'name' => 'Plano Teste SDK',
+      'price' => 4990,
+      'currency' => 'BRL',
+      'cycle' => 'MONTHLY',
+      'description' => 'Produto de assinatura para testes do SDK',
+    ],
+  ]);
 
-//   $customerCreateResponse = $abacatePayClient->customers()->create(
-//     CustomerCreateBody::make($faker->email())
-//       ->cellphone($faker->phoneNumber())
-//       ->name($faker->name())
-//       ->taxId(rand(0, 1) ? $faker->cnpj() : $faker->cpf())
-//       ->zipCode($faker->postcode())
-//   );
+  $customerCreateResponseBody = $abacatePayClient->customers()->create(
+    CustomerCreateRequestData::make($faker->email())
+      ->cellphone($faker->phoneNumber())
+      ->name($faker->name())
+      ->taxId(rand(0, 1) ? $faker->cnpj() : $faker->cpf())
+      ->zipCode($faker->postcode())
+  );
 
-//   $externalId = 'subs-'.uniqid();
-//   $returnUrl = 'https://seusite.com/voltar';
-//   $completionUrl = 'https://seusite.com/sucesso';
+  $externalId = 'subs-'.uniqid();
+  $returnUrl = 'https://seusite.com/voltar';
+  $completionUrl = 'https://seusite.com/sucesso';
 
-//   $subscriptionCreateBody = SubscriptionCreateBody::make([
-//     Item::make($product['id'], 1),
-//   ])
-//     ->methods([SubscriptionMethodEnum::CARD])
-//     ->customerId($customerCreateResponse->id)
-//     ->externalId($externalId)
-//     ->returnUrl($returnUrl)
-//     ->completionUrl($completionUrl);
+  $subscriptionCreateRequestData = SubscriptionCreateRequestData::make([
+    Item::make($product['id'], 1),
+  ])
+    ->methods([SubscriptionMethodEnum::CARD])
+    ->customerId($customerCreateResponseBody->data->id)
+    ->externalId($externalId)
+    ->returnUrl($returnUrl)
+    ->completionUrl($completionUrl);
 
-//   $subscriptionCreateResponse = $abacatePayClient->subscriptions()
-//     ->create($subscriptionCreateBody);
+  $subscriptionCreateResponseBody = $abacatePayClient->subscriptions()
+    ->create($subscriptionCreateRequestData);
 
-//   expect($subscriptionCreateResponse)
-//     ->not->toBeNull()
-//     ->and($subscriptionCreateResponse->id)->not->toBeEmpty()
-//     ->and($subscriptionCreateResponse->url)->not->toBeEmpty()
-//     ->and($subscriptionCreateResponse->externalId)->toBe($externalId)
-//     ->and($subscriptionCreateResponse->amount)->toBe(4990)
-//     ->and($subscriptionCreateResponse->paidAmount)->toBeNull()
-//     ->and($subscriptionCreateResponse->items)->toHaveCount(1)
-//     ->and($subscriptionCreateResponse->items[0]->toArray())->toBe([
-//       'id' => $product['id'],
-//       'quantity' => 1,
-//     ])
-//     ->and($subscriptionCreateResponse->status)->toBe('PENDING')
-//     ->and($subscriptionCreateResponse->devMode)->toBe(true)
-//     ->and($subscriptionCreateResponse->customerId)->toBe($customerCreateResponse->id)
-//     ->and($subscriptionCreateResponse->returnUrl)->toBe($returnUrl)
-//     ->and($subscriptionCreateResponse->completionUrl)->toBe($completionUrl)
-//     ->and($subscriptionCreateResponse->createdAt)->not->toBeEmpty()
-//     ->and($subscriptionCreateResponse->updatedAt)->not->toBeEmpty()
-//   ;
-// });
+  expect($subscriptionCreateResponseBody)
+    ->not->toBeNull()
+    ->and($subscriptionCreateResponseBody->data->id)->not->toBeEmpty()
+    ->and($subscriptionCreateResponseBody->data->url)->not->toBeEmpty()
+    ->and($subscriptionCreateResponseBody->data->externalId)->toBe($externalId)
+    ->and($subscriptionCreateResponseBody->data->amount)->toBe(4990)
+    ->and($subscriptionCreateResponseBody->data->paidAmount)->toBeNull()
+    ->and($subscriptionCreateResponseBody->data->items)->toHaveCount(1)
+    ->and($subscriptionCreateResponseBody->data->items[0]->toArray())->toBe([
+      'id' => $product['id'],
+      'quantity' => 1,
+    ])
+    ->and($subscriptionCreateResponseBody->data->status)->toBe('PENDING')
+    ->and($subscriptionCreateResponseBody->data->devMode)->toBe(true)
+    ->and($subscriptionCreateResponseBody->data->customerId)->toBe($customerCreateResponseBody->data->id)
+    ->and($subscriptionCreateResponseBody->data->returnUrl)->toBe($returnUrl)
+    ->and($subscriptionCreateResponseBody->data->completionUrl)->toBe($completionUrl)
+    ->and($subscriptionCreateResponseBody->data->createdAt)->not->toBeEmpty()
+    ->and($subscriptionCreateResponseBody->data->updatedAt)->not->toBeEmpty()
+  ;
+});
 
-// test('cancels a subscription', function () {
-//   $faker = Factory::create('pt_BR');
-//   $token = getToken();
-//   $abacatePayClient = new AbacatePayClient($token);
+test('cancels a subscription', function () {
+  $faker = Factory::create('pt_BR');
+  $token = getToken();
+  $abacatePayClient = new AbacatePayClient($token);
 
-//   $product = $abacatePayClient->post('products/create', [
-//     'json' => [
-//       'externalId' => 'sdk-test-sub-cancel-'.uniqid(),
-//       'name' => 'Plano Teste SDK Cancel',
-//       'price' => 4990,
-//       'currency' => 'BRL',
-//       'cycle' => 'MONTHLY',
-//       'description' => 'Produto de assinatura para testes de cancelamento do SDK',
-//     ],
-//   ]);
+  $product = $abacatePayClient->post('products/create', [
+    'json' => [
+      'externalId' => 'sdk-test-sub-cancel-'.uniqid(),
+      'name' => 'Plano Teste SDK Cancel',
+      'price' => 4990,
+      'currency' => 'BRL',
+      'cycle' => 'MONTHLY',
+      'description' => 'Produto de assinatura para testes de cancelamento do SDK',
+    ],
+  ]);
 
-//   $customerCreateResponse = $abacatePayClient->customers()->create(
-//     CustomerCreateBody::make($faker->email())
-//       ->cellphone($faker->phoneNumber())
-//       ->name($faker->name())
-//       ->taxId(rand(0, 1) ? $faker->cnpj() : $faker->cpf())
-//       ->zipCode($faker->postcode())
-//   );
+  $customerCreateResponseBody = $abacatePayClient->customers()->create(
+    CustomerCreateRequestData::make($faker->email())
+      ->cellphone($faker->phoneNumber())
+      ->name($faker->name())
+      ->taxId(rand(0, 1) ? $faker->cnpj() : $faker->cpf())
+      ->zipCode($faker->postcode())
+  );
 
-//   $externalId = 'subs-cancel-'.uniqid();
-//   $returnUrl = 'https://seusite.com/voltar';
-//   $completionUrl = 'https://seusite.com/sucesso';
+  $externalId = 'subs-cancel-'.uniqid();
+  $returnUrl = 'https://seusite.com/voltar';
+  $completionUrl = 'https://seusite.com/sucesso';
 
-//   $subscriptionCreateBody = SubscriptionCreateBody::make([
-//     Item::make($product['id'], 1),
-//   ])
-//     ->methods([SubscriptionMethodEnum::CARD])
-//     ->customerId($customerCreateResponse->id)
-//     ->externalId($externalId)
-//     ->returnUrl($returnUrl)
-//     ->completionUrl($completionUrl);
+  $subscriptionCreateRequestData = SubscriptionCreateRequestData::make([
+    Item::make($product['id'], 1),
+  ])
+    ->methods([SubscriptionMethodEnum::CARD])
+    ->customerId($customerCreateResponseBody->data->id)
+    ->externalId($externalId)
+    ->returnUrl($returnUrl)
+    ->completionUrl($completionUrl);
 
-//   $subscriptionCreateResponse = $abacatePayClient->subscriptions()
-//     ->create($subscriptionCreateBody);
+  $subscriptionCreateResponseBody = $abacatePayClient->subscriptions()
+    ->create($subscriptionCreateRequestData);
 
-//   $subscriptionCancelResponse = $abacatePayClient->subscriptions()
-//     ->cancel(SubscriptionCancelBody::make($subscriptionCreateResponse->id));
+  $subscriptionCancelResponseBody = $abacatePayClient->subscriptions()
+    ->cancel(SubscriptionCancelRequestData::make($subscriptionCreateResponseBody->data->id));
 
-//   expect($subscriptionCancelResponse)
-//     ->not->toBeNull()
-//     ->and($subscriptionCancelResponse->id)->not->toBeEmpty()
-//     ->and($subscriptionCancelResponse->customerId)->toBe($customerCreateResponse->id)
-//     ->and($subscriptionCancelResponse->amount)->toBe(4990)
-//     ->and($subscriptionCancelResponse->status)->toBe('CANCELLED')
-//     ->and($subscriptionCancelResponse->method)->toBe('CARD')
-//     ->and($subscriptionCancelResponse->coupons)->toBe([])
-//     ->and($subscriptionCancelResponse->devMode)->toBe(true)
-//     ->and($subscriptionCancelResponse->trialDays)->toBeNull()
-//     ->and($subscriptionCancelResponse->trialEndsAt)->toBeNull()
-//     ->and($subscriptionCancelResponse->createdAt)->not->toBeEmpty()
-//     ->and($subscriptionCancelResponse->updatedAt)->not->toBeEmpty()
-//   ;
-// });
+  expect($subscriptionCancelResponseBody)
+    ->not->toBeNull()
+    ->and($subscriptionCancelResponseBody->data->id)->not->toBeEmpty()
+    ->and($subscriptionCancelResponseBody->data->customerId)->toBe($customerCreateResponseBody->data->id)
+    ->and($subscriptionCancelResponseBody->data->amount)->toBe(4990)
+    ->and($subscriptionCancelResponseBody->data->status)->toBe('CANCELLED')
+    ->and($subscriptionCancelResponseBody->data->method)->toBe('CARD')
+    ->and($subscriptionCancelResponseBody->data->coupons)->toBe([])
+    ->and($subscriptionCancelResponseBody->data->devMode)->toBe(true)
+    ->and($subscriptionCancelResponseBody->data->trialDays)->toBeNull()
+    ->and($subscriptionCancelResponseBody->data->trialEndsAt)->toBeNull()
+    ->and($subscriptionCancelResponseBody->data->createdAt)->not->toBeEmpty()
+    ->and($subscriptionCancelResponseBody->data->updatedAt)->not->toBeEmpty()
+  ;
+});

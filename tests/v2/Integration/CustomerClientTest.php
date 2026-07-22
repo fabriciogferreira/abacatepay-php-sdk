@@ -2,9 +2,9 @@
 
 use Faker\Factory;
 use AbacatePay\v2\Clients\AbacatePayClient;
-use AbacatePay\v2\Body\Customer\CustomerGetBody;
-use AbacatePay\v2\Body\Customer\CustomerCreateBody;
-use AbacatePay\v2\Body\Customer\CustomerDeleteBody;
+use AbacatePay\v2\RequestData\Customer\CustomerGetRequestData;
+use AbacatePay\v2\RequestData\Customer\CustomerCreateRequestData;
+use AbacatePay\v2\RequestData\Customer\CustomerDeleteRequestData;
 
 beforeEach(function () {
   $token = getToken();
@@ -35,7 +35,7 @@ beforeEach(function () {
 
 //   $abacatePayClient = new AbacatePayClient($token);
 
-//   $customerCreateBody = CustomerCreateBody::make($email)
+//   $customerCreateRequestData = CustomerCreateRequestData::make($email)
 //     ->cellphone($cellphone)
 //     ->name($name)
 //     ->taxId($taxId)
@@ -43,17 +43,17 @@ beforeEach(function () {
 //     // ->metadata($metadata)
 //     ;
 
-//   $customerCreateResponse = $abacatePayClient->customers()
-//     ->create($customerCreateBody);
+//   $customerCreateResponseBody = $abacatePayClient->customers()
+//     ->create($customerCreateRequestData);
 
-//   expect($customerCreateResponse)
+//   expect($customerCreateResponseBody)
 //     ->not->toBeNull()
-//     ->and($customerCreateResponse->id)->not->toBeEmpty()
-//     ->and($customerCreateResponse->email)->toBe($email)
-//     ->and($customerCreateResponse->cellphone)->toBe($cellphone)
-//     ->and($customerCreateResponse->taxId)->toBe($taxId)
-//     ->and($customerCreateResponse->zipCode)->toBe($zipCode)
-//     // ->and($customerCreateResponse->metadata)->toBe($metadata)
+//     ->and($customerCreateResponseBody->data->id)->not->toBeEmpty()
+//     ->and($customerCreateResponseBody->data->email)->toBe($email)
+//     ->and($customerCreateResponseBody->data->cellphone)->toBe($cellphone)
+//     ->and($customerCreateResponseBody->data->taxId)->toBe($taxId)
+//     ->and($customerCreateResponseBody->data->zipCode)->toBe($zipCode)
+//     // ->and($customerCreateResponseBody->metadata)->toBe($metadata)
 //     ;
 // });
 
@@ -70,30 +70,30 @@ beforeEach(function () {
 
 //   $abacatePayClient = new AbacatePayClient($token);
 
-//   $customerCreateBody = CustomerCreateBody::make($email)
+//   $customerCreateRequestData = CustomerCreateRequestData::make($email)
 //     ->cellphone($cellphone)
 //     ->name($name)
 //     ->taxId($taxId)
 //     ->zipCode($zipCode)
 //     ;
 
-//   $customerCreateResponse = $abacatePayClient->customers()
-//     ->create($customerCreateBody);
+//   $customerCreateResponseBody = $abacatePayClient->customers()
+//     ->create($customerCreateRequestData);
 
-//   $customerGetBody = CustomerGetBody::make($customerCreateResponse->id);
+//   $customerGetRequestData = CustomerGetRequestData::make($customerCreateResponseBody->data->id);
 
-//   $customerGetResponse = $abacatePayClient->customers()
-//     ->get($customerGetBody);
+//   $customerGetResponseBody = $abacatePayClient->customers()
+//     ->get($customerGetRequestData);
 
-//   expect($customerGetResponse)
+//   expect($customerGetResponseBody)
 //     ->not->toBeNull()
-//     ->and($customerGetResponse->id)->toBe($customerCreateResponse->id)
-//     ->and($customerGetResponse->devMode)->toBe(true)
-//     ->and($customerGetResponse->name)->toBe($customerCreateResponse->name)
-//     ->and($customerGetResponse->email)->toBe($customerCreateResponse->email)
-//     ->and($customerGetResponse->cellphone)->toBe($customerCreateResponse->cellphone)
-//     ->and($customerGetResponse->taxId)->toBe($customerCreateResponse->taxId)
-//     ->and($customerGetResponse->zipCode)->toBe($customerCreateResponse->zipCode)
+//     ->and($customerGetResponseBody->data->id)->toBe($customerCreateResponseBody->data->id)
+//     ->and($customerGetResponseBody->data->devMode)->toBe(true)
+//     ->and($customerGetResponseBody->data->name)->toBe($customerCreateResponseBody->data->name)
+//     ->and($customerGetResponseBody->data->email)->toBe($customerCreateResponseBody->data->email)
+//     ->and($customerGetResponseBody->data->cellphone)->toBe($customerCreateResponseBody->data->cellphone)
+//     ->and($customerGetResponseBody->data->taxId)->toBe($customerCreateResponseBody->data->taxId)
+//     ->and($customerGetResponseBody->data->zipCode)->toBe($customerCreateResponseBody->data->zipCode)
 //     ;
 // });
 
@@ -118,7 +118,7 @@ beforeEach(function () {
 
 //   $abacatePayClient = new AbacatePayClient($token);
 
-//   $customerCreateBody = CustomerCreateBody::make($email)
+//   $customerCreateRequestData = CustomerCreateRequestData::make($email)
 //     ->cellphone($cellphone)
 //     ->name($name)
 //     ->taxId($taxId)
@@ -126,23 +126,23 @@ beforeEach(function () {
 //     // ->metadata($metadata)
 //     ;
 
-//   $customerCreateResponse = $abacatePayClient->customers()
-//     ->create($customerCreateBody);
+//   $customerCreateResponseBody = $abacatePayClient->customers()
+//     ->create($customerCreateRequestData);
 
-//   $customerDeleteBody = CustomerDeleteBody::make($customerCreateResponse->id);
+//   $customerDeleteRequestData = CustomerDeleteRequestData::make($customerCreateResponseBody->data->id);
 
-//   $customerDeleteResponse = $abacatePayClient->customers()
-//     ->delete($customerDeleteBody);
+//   $customerDeleteResponseBody = $abacatePayClient->customers()
+//     ->delete($customerDeleteRequestData);
 
-//   expect($customerDeleteResponse)
+//   expect($customerDeleteResponseBody)
 //     ->not->toBeNull()
-//     ->and($customerDeleteResponse->id)->toBe($customerCreateResponse->id)
-//     ->and($customerDeleteResponse->devMode)->toBe(true)
-//     ->and($customerDeleteResponse->name)->toBe($customerCreateResponse->name)
-//     ->and($customerDeleteResponse->email)->toBe($customerCreateResponse->email)
-//     ->and($customerDeleteResponse->cellphone)->toBe($customerCreateResponse->cellphone)
-//     ->and($customerDeleteResponse->taxId)->toBe($customerCreateResponse->taxId)
-//     ->and($customerDeleteResponse->zipCode)->toBe($customerCreateResponse->zipCode)
+//     ->and($customerDeleteResponseBody->data->id)->toBe($customerCreateResponseBody->data->id)
+//     ->and($customerDeleteResponseBody->data->devMode)->toBe(true)
+//     ->and($customerDeleteResponseBody->data->name)->toBe($customerCreateResponseBody->data->name)
+//     ->and($customerDeleteResponseBody->data->email)->toBe($customerCreateResponseBody->data->email)
+//     ->and($customerDeleteResponseBody->data->cellphone)->toBe($customerCreateResponseBody->data->cellphone)
+//     ->and($customerDeleteResponseBody->data->taxId)->toBe($customerCreateResponseBody->data->taxId)
+//     ->and($customerDeleteResponseBody->data->zipCode)->toBe($customerCreateResponseBody->data->zipCode)
 //     // ->and($customerDeleteResponse->metadata)->toBe($customerCreateResponse->metadata)
 //     ;
 // });
